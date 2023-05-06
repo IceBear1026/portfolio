@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mediaqueries.css">
+
+</head>
+<body>
+
+    <nav id = "desktop-nav">
+        <div class="logo">Steven Yang</div>
+        <div>
+            <ul class = "nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <nav id="hamburger-nav">
+        <div class="logo">Steven Jaewan Yang</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- The reason why we are using onclick="toggleMenu" when we click on the links is because we will define the toggleMenu function to open and close depending on its status of whether or not it's open or not. -->
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <section id="profile">
+        <div class="section__pic-container">
+            <img src="./assets/profile-pic.jpg" alt="Steven Yang profile picture" class="rounded-image"/>
+        </div>
+        <div class="section__text">
+
+            <p class="section__text__p1">Hello, I'm</p>
+            <h1 class="title">Steven Yang</h1>
+            <p class="section__text__p2"> Cyber Security Engineer</p>
+
+            <div class="btn-container">
+                <!-- Window is referencing the WHOLE webpage. It's opening an entire webpage for my resume. -->
+                <button class="btn btn-color-2" onclick="window.open('./assets/resume1.pdf')">
+                    Download CV
+                </button>
+                <!-- Location is referencing a local directory within the webpages. -->
+                <button class="btn btn-color-1" onclick="location.href='./#contact'">
+                    Contact Info
+                </button>
+            </div>
+
+            <div id="socials-container">
+                <img src="./assets/LI-Logo.png" alt="My LinkedIn profile" class="icon" onclick="location.href='https://www.linkedin.com/in/steven-yang-2691a3153/'"/>
+                
+                <img src="./assets/THMlogo.png" alt="My TryHackMe profile" class="icon" onclick="location.href='https://tryhackme.com/p/wodhks1026'"/>
+
+                <img src="./assets/GitHub_Logo.png" alt="My Github profile" class="icon" onclick="location.href='https://github.com/IceBear1026'"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <p class="section__text__p1">Get To Know More</p>
+        <h1 class="title">About Me</h1>
+        <div class="section-container">
+          <div class="section__pic-container">
+            <img
+              src="./assets/about-pic.jpg"
+              alt="Profile picture"
+              class="about-pic"
+            />
+          </div>
+          <div class="about-details-container">
+            <div class="about-containers">
+              <div class="details-container">
+                <img
+                  src="./assets/experience.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <h3>Experience</h3>
+                <p>3+ years <br />Cyber Security and Information Security<br>Engineering and Analysis</p>
+              </div>
+              <div class="details-container">
+                <img
+                  src="./assets/education.png"
+                  alt="Education icon"
+                  class="icon"
+                />
+                <h3>Education</h3>
+                <p>Bachelors of Science in Information Science - Cybersecurity <br/>@ University of Maryland College Park <br/>CISSP certified</p>
+              </div>
+            </div>
+            <div class="text-container">
+              <p>
+                I am an immigrant from South Korea, belonging to the first generation in my family to move to the United States. Initially, I faced significant language barriers as I had no knowledge of the English language. As a result, I encountered various challenges that are commonly experienced by first-generation immigrants in America. However, I remained determined and resilient in the face of adversity. </br></br>
+
+                Despite the obstacles, I managed to obtain a bachelor's degree and pursued professional certifications such as CISSP, AWS Solutions Architect, and Security Specialty. Additionally, I am currently working towards earning the OSCP certification to enhance my penetration skills. Recognizing the importance of a comprehensive understanding of web development, I decided to create a website. This endeavor allowed me to delve deeper into the realms of HTML, CSS, and JavaScript. </br></br>
+
+                Presently, I serve as a cybersecurity professional, leveraging my expertise in IT/Cloud Security and Software Development. I actively seek cloud security-related projects and embrace the DevSecOps culture, emphasizing the integration of security practices throughout the software development lifecycle.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <img
+          src="./assets/arrow.png"
+          alt="Arrow icon"
+          class="icon arrow"
+          onclick="location.href='./#experience'"
+        />
+
+    </section>
+
+    <section id="experience">
+        <p class="section__text__p1">Explore My</p>
+        <h1 class="title">Experience</h1>
+        <div class="experience-details-container">
+            
+            <div class="about-containers">
+                <div class="details-containers">
+
+                    <h2 class="Experience-sub-title">Cyber Security Engineer @ Careful Security</h2>
+                    <div class="article-container">
+                        <article>
+                            Increased 20% to 80% SOC 2 compliance in the AWS cloud environment.</br>
+                            Implemented PCI DSS and CIS Benchmark Compliances on AWS cloud environments.</br>
+                            Integrated AWS Cloud Security services like Web Application Firewall, GuardDuty, CloudTrail, CloudWatch, Macie, S3 buckets, and Systems Manager with SIEMS like Wazuh.</br>
+                            Configured CloudTrail with Cloudwatch custom metric filters and created notification systems with SNS topics. Created custom network architecture on AWS Cloud using services such as S3, Auto-scaling groups, Load balancers, and Kinesis.
+
+                        </article>
+                    </div>
+
+                    </br>
+
+                    <h2 class="Experience-sub-title">Tech Support Associate @ Infosys Limited</h2>
+                    <div class="article-container">
+                        <article>
+                            Analyzing data streams from the network and application using Splunk. </br>
+                            Review incident alerts and run vulnerability tests.</br>
+                            Escalate to L2 Analyst with proper security analyst report.</br></br>
+
+                            Led the PAM configuration team, which consisted of: Syncing the AD server, Importing users and device groups with policies; Mounting and creating PAM instances to VMware server clusters in network diagram design; Linking and verifying PAM connection with NFS storage servers for session recording; RADIUS servers for 2fa; SEP clients for SEPM; Alert Logic servers for PAM logs.</br>
+                            Assigned and configured Palo Alto firewalls to provide high availability, interconnectivity, and internet access with Global Protect.</br>
+                            Installed SEPM to Windows 2016 servers and deployed agents to clients with WinSCP or manually installed it in the Linux terminal.
+
+
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <img 
+        src="./assets/arrow.png" 
+        alt="Arrow icon" 
+        class="icon arrow" 
+        onclick= "location.href='./#projects'"
+        />
+
+    </section>
+
+    <section id="projects">
+
+        <p class="section__text__p1"> Browse My Recent</p>
+        <h1 class="title">Projects</h1>
+        </br>
+
+        <div class="experience-details-container">
+            <div class="about-containers">
+
+                <div class="details-container color-container">
+                    <div class="article-container color-container">
+                    <h2 class="experience-sub-title project-title"><a href="https://drive.google.com/drive/folders/1fDWnVtrjErY2Dg0s1_9zAODScFDDMZHT">Custom UDP Packet Program </a></h2>
+                    </div>
+                </div>
+    
+         
+      
+                <div class="details-container color-container">
+
+                    <h2 class="experience-sub-title project-title"><a href="ticTacToeApp/index.html">Tic Tac Toe </a></h2>
+
+                </div>
+      
+   
+        
+                <div class="details-container color-container">
+
+                    <h2 class="experience-sub-title project-title"><a href="glassClockApp/index.html">Glass Clock </a></h2>
+
+                </div>
+             
+                <div class="details-container color-container">
+
+                    <h2 class="experience-sub-title project-title"><a href="calculatorApp/index.html">Calculator </a></h2>
+
+                </div>
+        
+        
+                <div class="details-container color-container">
+
+                    <h2 class="experience-sub-title project-title"><a href="weatherApp/index.html">Weather App </a></h2>
+
+                </div>
+            </div>
+        </div>
+        <img 
+        src="./assets/arrow.png" 
+        alt="Arrow icon" 
+        class="icon arrow" 
+        onclick= "location.href='./#contact'"
+        />
+
+    </section>
+    
+    <section id="contact">
+        <p class="section__text__p1">Get In Touch</p>
+        <h1 class="title">Contact Me</h1>
+        <div class="contact-info-upper-container">
+            
+            <div class="contact-info-container">
+                <img src="./assets/email.png" 
+                    alt="Email icon" 
+                    class="icon contact-icon"
+                />
+
+                <p><a href="mailto:wodhks1026@gmail.com">wodhks1026@gmail.com</a></p>
+
+            </div>
+
+            <div class="contact-info-container">
+                <img src="./assets/LI-Logo.png" 
+                    alt="LinkedIn icon" 
+                    class="icon contact-icon"
+                />
+
+                <p><a href="https://www.linkedin.com/in/steven-yang-2691a3153/">LinkedIn</a></p>
+
+            </div>
+
+        </div>
+
+    </section>
+    <script src="script.js"></script>
+    
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class = "nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>Copyright &#169; 2023 Steven Yang. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
