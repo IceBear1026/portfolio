@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES Cipher Feedback Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="headers">
+        <h1 class="title">DES Cipher Feedback Mode </h1>
+    </section>
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./des_ofb_image.jpg" alt="DES logic flow" class="rounded-image">
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                DECRYPTION method is just reversed. 
+                <br>
+                <br>
+                Assuming we have C1, C2, C3 …. Cn where each Cx = s-bits long.
+                x1⊕P1 = C1 then C1⊕x1 = P1 should be true.
+                And with this logic you could output Px for each iteration.
+                <br>
+                <br>
+                I wanted to try creating a program that uses Cipher Feedback Mode because it allows you to have a flexibility in choosing a segmented size ranging from 8, 16 and 32 bits at a time. And I thought this capability was unique on its own. 
+                <br>
+                <br>
+                One thing to consider is that Cipher Feedback Mode has a potential vulnerability of error propagation. For example, if C1 had an error, the error will travel to its next iteration to C2 causing all the data that's being encoded afterwards to be modified. 
+                <br>
+                <br>
+                Secrecy of Initialization Vector (IV) and the Key should be protected. 
+                <br>
+                <br>
+                In order to prevent the error propagation, you could use OUTPUT FEEDBACK MODE.
+                It is very similar to CIPHER FEEDBACK MODE but uses the intermediary data to be the input of the next iteration making the final ciphertext to be independent on its own. So even if it the "8-bit" long of one block of ciphertext is in error, the rest of the texts in theory should be accurate. 
+                <br>
+            </p>
+        </div>
+    </section>
+    <section id="link">
+        <div class="link_container">
+            <h2 class="link_to_DES"><a href="https://github.com/IceBear1026/DES_CFB">Github Link to DES Cipher</a></h2>
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <br>
+                Plausible theory, failed reality - Meet In The Middle
+                <br><br>
+                The intriguing aspect of 2DES, from my perspective, was its fundamental premise that suggested an enhancement in the robustness of the encryption algorithm – ostensibly offering a two-fold increase in security. However, upon transition from theory to practice, the actual outcome unfortunately didn't meet the projected doubling of efficacy, thus accentuating the pronounced discrepancy that often emerges between theoretical propositions and their real-world implementations.
+                <br><br>
+                The Data Encryption Standard (DES) employs a 64-bit plaintext and a 64-bit key, K1, which in actuality is effectively 56-bits. The introduction of 2DES into this framework introduces a second key, K2, which is also 56-bits. Theoretically, this might suggest that the number of necessary calculations to crack this encryption system would amount to 2^(56+56), resulting in a seemingly formidable total of 2^(112) possibilities. However, that was not the case.
+                <br><br>
+                The failure of 2DES can largely be attributed to two fundamental flaws: its even-numbered sequence of operations and its sequential encryption structure, where one encryption directly follows another.
+                <br>
+            </p>
+        </div>
+    </section>
+    <section id="image">
+        <div class="section__image__container_terminal">
+            
+                <img src="./sae.png" alt="DES logic flow" class="rounded-image" class="terminal">
+             
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <br>
+                By taking advantage of two split terminals in vscode and using my custom DES program, I was able to simulate the process of 2DES. After using a randomly generated IV and K1 for the first iteration of DES in the first terminal, I used the following outputs as inputs for my second iteration in the second terminal. On the second terminal, a second randomly generated key is used to create the ciphertext. 
+                <br>
+            </p>
+        </div>
+    </section>
+    <section id="image">
+        <div class="section__image__container_forward">
+            
+                <img src="./foward.jpg" alt="DES_forward" class="rounded-image" class="forward">
+            
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <br>
+                The above encryption diagram follows this equation: CT = E[K2] (E[K1] (PT)). As you can see it’s a sequential encryption algorithm where the first encryption output leads to the next encryption. And regardless of mode of operation, whether it is Output Feedback or Cipher Feedback Mode, finding the intermediary data between each encryption leads to ultimately cracking the cipher. That is because intermediary data will not matter whether it’s a ciphertext or temporary data being used as input for the shift register. By logic the data is still considered “intermediary” between the encryption process.
+                <br>
+            </p>
+        </div>
+    </section>
+    <section id="image">
+        <div class="section__image__container_reverse">
+            
+                <img src="./intermed.jpg" alt="DES_reverse" class="rounded-image" class="reverse">
+            
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                If you encrypt the first iteration and decryption with the second iteration, you essentially create two lists of 2^56 variations of possible keys. And by comparing two lists for an identical value you will be able to crack the algorithm.
+                <br>
+                <br>
+                In revisiting the notion of exponentially augmenting the robustness of the encryption algorithm by sequential doubling of DES, it ironically culminated in a scenario where only two separate 2^56 calculations were required. This implies that instead of achieving the theoretically assumed 2^112 combinations, the complexity was merely incremented by a single exponent, resulting in a total of 2^57 calculations. Thus, 2DES did not deliver the perceived two-fold increase in cryptographic complexity, but rather, offered only a marginal improvement.
+                <br>
+                <br>
+                My original intent was to construct a simulation of this cryptographic scenario using Python. However, I swiftly came to the realization that my available hardware resources fell significantly short of being able to handle the vast number of calculations - precisely 144115188075855872, or 2^57, computations in a straightforward for loop. At present, there exists a DES cracking service at crack.sh which, leveraging thousands of networked computers, asserts they can crack DES keys for a monetary fee. And I would rather invest my money elsewhere. 
+                <br>
+                <br>
+                This project definitely allowed me to dive deep into understanding different cryptographic modes of operations. Especially block ciphers and symmetric encryption. 
+                <br>
+                <br>
+            </p>
+        </div>
+    </section>
+</body>
+</html>
