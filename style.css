@@ -303,6 +303,11 @@ flex-direction: column;
 display: flex;
 }
 
+.about-containers, .contact-info-upper-container, .btn-container{
+    flex-wrap: wrap;
+}
+
+
 .about-pic {
 border-radius: 2rem;
 }
