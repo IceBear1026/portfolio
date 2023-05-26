@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+img{
+    width:100%;
+    object-fit:contain;
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img[alt~="network_diagram"]{
+    max-width:45%;
+}
+
+img[alt~="setting"]{
+    max-width:25%;
+}
+
+img[alt~="two_screens"]{
+    max-width:45%;
+}
+
+img[alt~="desktop_image"]{
+    max-width:45%;
+}
+
+img[alt~="spoofing"]{
+    max-width:65%;
+}
+
+img[alt~="result"]{
+    max-width:45%;
+}
+
+img[alt~="transfer"]{
+    max-width:45%;
+}
+
+img[alt~="folder"]{
+    max-width:45%;
+}
+
+img[alt~="show"]{
+    max-width:45%;
+}
+
+img[alt~="transfer_again"]{
+    max-width:75%;
+}
+
+img[alt~="permissions"]{
+    max-width:45%;
+}
+
+img[alt~="final_result"]{
+    max-width:45%;
+}
+
+img[alt~="proof"]{
+    max-width:45%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#headers {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 5rem;
+}
+
+#paragraph{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.explanation {
+    padding: 20px;
+    
+    max-width: 50%;
+}
+
+.rounded-image{
+    border-radius: 1rem;
+}
+
+#images{
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-container{
+    display:flex;
+    align-items: center;
+}
+
+.section__image__container{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    text-align:center;
+    margin:0 10px;
+}
+
+#link{
+    position: relative;
+}
+
+.link_container{
+    display:flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}

