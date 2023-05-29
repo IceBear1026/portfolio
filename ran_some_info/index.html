@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br><br><br><br><br><br>
+    <section id="headers">
+        <h1 class="title">Unauthorized Ransomware in AWS Project</h1>
+    </section>
+    <br>
+    <section id="headers">
+        <h3 class="scenario">Relevant scenarios</h3>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+            A developer account that has S3fullaccess role
+            <br>
+            Note: this type of attack can be done with any of the full access roles as such as Amazon EBS, EFS, DynamoDB and etc.
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class ="subheader">Simulation environment</h3>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/simulated.png" alt="aws_network" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="link">
+        <div class="link_container">
+            <h2 class="link_to_DES"><a href="https://github.com/IceBear1026/ransomware">Github Link to the Codes</a></h2>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class ="subheader">How the ransomware encryption algorithm works: RSA PKCS1_OAEP and AES OMAC1/CMAC</h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <strong>Technical terms:</strong><br>
+                    Cryptographic primitive: low-level cryptographic algorithms that are used for cryptographic protocols for computer security systems - examples include one-way hash functions and encryption functions.<br>
+
+                    Padding: adding data to the beginning, middle, or end of message prior to encryption.<br>
+            
+                    Trapdoor function: It is a function that is easy to compute in one direction yet difficult to compute in the opposite direction without special information. (Think of public-key cryptography)
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/trapdoor.png" alt="trap_door" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                When a SMALL PIECE of data is encrypted using RSA, an attacker can craft a series of ciphertexts and use the decryption of these ciphertexts to reveal the original small piece of data eventually. - Chosen ciphertext attack.<br><br>
+                Padding is used to PREVENT this attack by ensuring that the plaintexts are sufficiently long and random so that the attacker can't craft meaningful ciphertexts. <br><br>
+
+                PKCS1_OAEP cipher algorithm - Public-Key Cryptography Standards #1 - Optimal Asymmetric Encryption PADDING.<br><br>
+                OAEP provides a specific method of padding that adds randomness to the data before it's encrypted, increasing the security of the encryption.<br><br>
+                Usually, people would add a bunch of 0's to match the number of blocks that are created. OAEP algorithm uses pair of random oracles, "G" and "H."
+                Combining this padding with trapdoor one-way permutation (In this case, RSA public key algorithm), it proved to provide security against chosen plaintext and chosen ciphertext attacks. 
+                Overall, OAEP provides an element of randomness to convert a <strong>DETERMINISTIC</strong> encryption scheme (bare RSA) into a <strong>PROBABILISTIC</strong> scheme. (Making the encryption harder to guess).<br><br>
+                It also prevents PARTIAL decryption of ciphertexts (or other information LEAKAGE) because the hacker can not recover a portion of plaintext without being able to invert the TRAPDOOR ONE-WAY PERMUTATION. <br>
+
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/EAX_mode.png" alt="eax_mode" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                This diagram shows multiple processes and methods to generate a simple authentication tag: T.
+                This is a representation of EAX encryption where the message is M, the key is K, the authenticated header is H, the nonce is N, and the encrypted message is C.<br><br>
+                OMAC-0K, OMAC-1K, and OMAC-2K are separate OMAC operations distinctively numbered by the order of operations using the same key, K. <br><br>
+                CTRK is the counter operation that is used during EAX Mode.<br><br>
+
+                Counter mode provides parallel encryption for efficiency in contrast to other CBC modes of operations. However, it does not provide message authentication or integrity checks. And this is why EAX is used where Counter Mode is used along with OMAC operations. 
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/counter_mode.png" alt="ctr_mode" class="rounded-image">
+        </div>
+    </section>
+    <br><br>
+    <section id="headers">
+        <h3 class="scenario">CMAC/OMAC1</h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                MAC: Message Authentication Code - a short piece of information used to confirm that a message came from the stated sender (authentication) and has not been changed in transit (integrity). It’s like a cryptographic SEAL on a message.<br><br>
+
+                CMAC - is a specific type of MAC algorithm that’s based on a block cipher such as AES. <br><br>
+
+                CMAC, OMAC, or OMAC1: is named this way because it’s “One-Key CBC-MAC.”
+
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/CBC_mode.png" alt="cbc_mode" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                CBC stands for “Cipher Block Chaining,” which is used to calculate MAC. <br><br>
+                When you have a message, you break them into blocks. And each of these blocks is “chained” with the previous one by mathematical operation before being encrypted. The result of this chaining and encryption is the MAC.<br><br>
+                This chaining mechanism means that even a small change in the message will cause a big change in the MAC, making it virtually impossible for an attack to change the message and still keep the same MAC.
+                This provides integrity of the message because it will be easy to see if the message has been tampered with during transit.
+
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class="scenario">CMAC/OMAC1 process</h3>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/CMAC.jpg" alt="CMAC" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                
+                <strong>Key Generation:</strong> 
+                The key used in AES for CMAC is derived from a secret key K, which is first used to encrypt a block of ZEROs. The output is then processed to create two more keys: K1 and K2 (also known as subkeys). These subkeys are used for padding the message in the final steps of the CMAC algorithm.<br><br> 
+                <strong>Message Preparation:</strong>
+                The input message is divided into blocks (M1, M2, …, Mn). If the last block is not the full block size, it’s padded. If it’s a complete block, a new block is added. <br><br>
+                The PADDING depends on whether the LAST BLOCK is complete or not.<br><br>
+                If it’s complete, the padding is a full block of the form ‘K1 || 0^nb’, where ‘||’ denotes concatenation and ‘0’nb’ represents a string of zeros of the necessary length.<br><br>
+                If it’s not complete, the padding is of the form ‘Mn || 10^r’, where ‘10^r’ is a string starting with ‘1’ followed by ‘r’ zeros, and ‘r’ is the number of bits required to complete the block. This incomplete block is then XORed with K1.<br><br>
+                <strong>MAC Computations:</strong>
+                CBC-MAC is performed on the prepared blocks. <br><br>This involves:
+                Initializing an AES cipher with the secret key K. 
+                Starting with an initialization vector (IV), the blocks are processed one by one. Each block is XOR-ed with the output of the previous encryption, and the result is encrypted with AES. 
+                The output from the final block’s encryption is the MAC.
+
+
+            </p>
+        
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <strong>SubKeys Generation (In-Depth):</strong>
+                First, a single block of zeros is encrypted using the original key K.
+                Let the output be L. Now, L is shifted one bit to the left. In other words, each bit i of L is replaced by the bit i+1, with the 0th bith replaced by 0. Let’s call the result L1.
+                Shift L one bit to the left (equivalent to multiplying L by 2 in binary).<br><br>
+                If the most significant (leftmost) bit of L before the shift was 1, then a constant Rb is XORed with L1 to give K1. If it was 0, then K1 is just L1.
+                The constant Rb depends on the block length (for a block length of 128 bits, as in AES, Rb is 0x87).
+                K2 is generated in a similar way, except it starts with K1 instead of L. K1 is shifted one bit to the left, and Rb is XORed with the result if the most significant bit of K1 was 1. The result is K2. <br><br>
+
+                When we talk about shifting bits in a fixed-size binary number (like our 128-bit block in AES), we essentially “move” each bit from one position to the left. When you shift all the bits to the left, the leftmost bit (the MSB before the shift) is discarded, and a new 0 is inserted on the rightmost side. <br><br>
+                For example, let’s take an 8-bit binary number, 10110011. If we shift this one bit to the left, we get 01100110. The leftmost 1 in the original number is gone, and a new 0 has been added on the right.<br><br>
+                In the context of CMAC subkey generation:
+                If the MSB (Most Significant Bit) of L (before shifting) is 1, this means that when we shift L to the left, we’re effectively “losing” a 1 because it’s discarded. To counter this, we XOR the result with a constant Rb (0x87 for 128-bit blocks).
+                If the MSB of L (before shifting) is 0, then no information is lost in the shift, and we can simply take the result of the shift as K1 or K2. 
+                <br><br>
+                When we XOR K1 or K2 with the final block, it guarantees that even a small change in the message (even just changing the message’s length) will cause a significant change in the resulting CMAC, making it difficult for an attacker to modify the message without being detected. 
+            </p>
+          
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <strong>Rb - Finite field arithmetic</strong>
+                The specific finite field we’re interested in is called GF(2^128) because we’re dealing with 128 bits at a time in AES.<br><br>
+                When we do certain operations in this field, such as shifting bits, we need to make sure that we don’t accidentally create a binary number that’s longer than 128 bits. That’s where Rb comes in.
+                Think about Rb as a special number that we use to keep our binary numbers in check. When we shift our bits to the left and the leftmost bit is 1 (which means it will be “pushed out” and make room for an extra 0 on the right), we add in this special number Rb using a process called XOR - a way of combining two bits. 
+
+            </p>
+            <br>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class="scenario">Ransomware Code Files</h3>
+    </section>
+    <br><br>
+
+    <section id="image">
+        <div class = "image-container">
+            <div class="section__image__container">
+                <img src="./images/RSA.PNG" alt="RSA" class="rounded-image">
+                <p class="image-title">RSA_public_key_gen.py</p>
+            </div>
+            <div class="section__image__container">
+                <img src="./images/decryption_1.PNG" alt="decryption" class="rounded-image">
+                <p class="image-title">Decryption.py</p>
+            </div>
+        </div>
+    </section>
+    <br><br>
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/encryption.png" alt = encryption class="rounded-image">
+            <p class="image-title">Decryption.py</p>
+        </div>
+    </section>
+    <br><br><br>
+
+    <section id="headers">
+        <h2 class="scenario">First I tried out the encryption code on my virtual environment as my test environment:</h2>
+    </section>
+    <br><br>
+    <section id="image">
+        <div class="image-container">
+            <div class="section__image__container">
+                <img src="./images/encryption_virtual.PNG" alt="encrypt_virtual" class="rounded-image">
+                <p class="image-title">Encryption Process</p>
+            </div>
+            <div class="section__image__container">
+                <img src="./images/decryption_virtual.PNG" alt="decrypt_virtual" class="rounded-image">
+                <p class="image-title">Decrypting Process</p>
+            </div>
+
+            <div class="section__image__container">
+                <img src="./images/decrypted.PNG" alt="decrypted" class="rounded-image">
+                <p class="image-title">Decrypted Files</p>
+            </div>
+        </div>
+    </section>
+    <br><br><br><br>
+    <section id="headers">
+        <h2 class="scenario">On AWS Environment:</h2>
+    </section>
+    <br>
+    <section id="headers">
+        <h3 class="scenario">Encryption_aws.py</h3>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/encryption_aws.png" alt="encrypt_aws" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Create a free EC2 instance where you will access the AWS services like S3 from its terminal - allow SSH port 22. (by default)
+            </p>
+            
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class="scenario">Create a user that has AmazonS3FullAccess role</h3>
+    </section>
+    <br>
+    <section id="image">
+        <div class="image-container">
+            <div class="section__image__container">
+                <img src="./images/developer.PNG" alt="developer" class="rounded-image">
+                <p class="image-title">Creating a Developer user</p>
+            </div>
+            <div class="section__image__container">
+                <img src="./images/files.PNG" alt="files" class="rounded-image">
+                <p class="image-title">Creating files in the bucket</p>
+            </div>
+        </div>
+        
+    </section>
+    <br>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Ssh into the the ec2 and run the python script that’s been configured to be used on aws. (using aws S3 bucket functions)
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/ssh.PNG" alt="ssh" class="rounded-image">
+        </div>
+    </section>
+    <br>
+    <section id="headers">
+        <h3 class="scenario">Encrypted bucket</h3>
+    </section>
+    <br>
+    <section id="image">
+        <div class="image-container">
+            <div class="section__image__container">
+                <img src="./images/encrypted_bucket.PNG" alt="enc_bucket" class="rounded-image">
+                <p class="image-title">Encrypted Files in S3 Bucket</p>
+            </div>
+            <div class="section__image__container">
+                <img src="./images/output.PNG" alt="output" class="rounded-image">
+                <p class="image-title">Creating file opened</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                (Don’t worry I deleted my ec2 instance, the account that uses the access key and secret key and the S3 bucket)
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class="scenario">The difference between encryption.py and encryption_aws.py</h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                <strong>Importing AWS SDK:</strong> the code imports the ‘boto3’ library, which is the official AWS SDK for Python. It allows interaction with various AWS services, including Amazon S3. <br></br>
+                <strong>Creating an S3 client:</strong> The code creates an S3 client using boto3.client(‘s3’). This client is used to interact with Amazon S3, such as listing objects, downloading files, uploading files, and deleting objects.<br><br>
+                <strong>AWS S3 operations: </strong>The code performs several operations in Amazon S3 buckets, including:
+                S3.list_objects_v2
+                S3.download_file
+                S3.upload_file
+                S3.delete_object
+                <br><br>
+                <strong>Setting AWS credentials and region:</strong> the code sets the AWS access key ID, secret access key, and default region by assigning values to the ‘os.environ’ dictionary. These credentials are necessary for authentication and authorization when interacting with AWS services.
+
+            </p>
+        </div>
+    </section>
+
+    <section id="headers">
+        <h3 class="scenario">Proactive steps to protect from this type of attacks:
+        </h3>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                When dealing with IAM services on AWS make sure to practice least privilege. Meaning if the developer within the company needs to access S3 bucket, only provide specific role that the developer needs NOT full access to S3. <br><br>
+                Slim down the scope of attack vectors by limiting specific IP address that can access AWS resources using security group. For example, who can access ssh protocol. <br><br>
+                Create cloudwatch + cloudtrail monitoring and logging management to keep track of which user has accessed and triggered the create_object or delete object function within S3. <br><br>
+                Although ransomware attack mostly affects the availability of data security, some sensitive data has more negative impact in loss of confidentiality. And so it’s also recommended that within your aws, make sure to leverage the AWS KMS to practice separation of duties by having two separate roles to access important data. For example, one user can have access to the data and another person can have access to the cryptographic keys. (Developer and security engineers)<br><br>
+                Make sure to create versioning for the buckets that is used.
+
+            </p>
+        </div>
+    </section>
+    <br><br><br><br><br><br><br>
+</body>
+</html>

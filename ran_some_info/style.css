@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+img{
+    width:100%;
+    object-fit:contain;
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* <br>
+<strong> </strong>*/
+
+img[alt~="aws_network"]{
+    max-width:45%;
+}
+img[alt~="trap_door"]{
+    max-width:20%;
+}
+img[alt~="eax_mode"]{
+    max-width:25%;
+}
+img[alt~="ctr_mode"]{
+    max-width:35%;
+}
+img[alt~="cbc_mode"]{
+    max-width:25%;
+}
+
+img[alt~="CMAC"]{
+    max-width:30%;
+}
+img[alt~="RSA"]{
+    max-width:100%;
+}
+img[alt~="encryption"]{
+    max-width:35%;
+}
+img[alt~="decryption"]{
+    max-width:100%;
+}
+img[alt~="encrypt_virtual"]{
+    max-width:100%;
+}
+img[alt~="decrypt_virtual"]{
+    max-width:100%;
+}
+img[alt~="decrypted"]{
+    max-width:100%;
+}
+img[alt~="encrypt_aws"]{
+    max-width:35%;
+}
+img[alt~="developer"]{
+    max-width:100%;
+}
+img[alt~="files"]{
+    max-width:100%;
+}
+img[alt~="ssh"]{
+    max-width:45%;
+}
+img[alt~="enc_bucket"]{
+    max-width:100%;
+}
+img[alt~="output"]{
+    max-width:100%;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+#headers {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 5rem;
+}
+
+#paragraph{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.explanation {
+    padding: 20px;
+    
+    max-width: 50%;
+}
+
+.rounded-image{
+    border-radius: 1rem;
+}
+
+#images{
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-container{
+    display:flex;
+    align-items: center;
+}
+
+.section__image__container{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    text-align:center;
+    margin:0 10px;
+}
+
+#link{
+    position: relative;
+}
+
+.link_container{
+    display:flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
