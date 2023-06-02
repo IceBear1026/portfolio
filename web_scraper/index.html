@@ -44,7 +44,9 @@
     <section id="paragraph">
         <div class="explanation">
             <p>
-                Okay we all know ISC2 likes to hide a lot of information behind how we did on the exam as much as they can. And so I decided to create a web scraper that collects as much data as possible that is publicly available on subreddit “CISSP” and find the average of the score that people finish their exam INCLUDING the scores recorded before June 1st 2022. 
+                Okay we all know ISC2 likes to hide a lot of information behind how we did on the exam as much as they can. 
+                <br> <br>
+                And so I decided to create a web scraper that collects as much data as possible that is publicly available on subreddit “CISSP” and find the average of the score that people finish their exam INCLUDING the scores recorded before June 1st 2022. 
 
             </p>
         </div>
@@ -58,10 +60,10 @@
     <section id="paragraph">
         <div class="explanation">
             <p>
-                As everyone knows who has taken the CISSP exam or is studying for the exam, the exam question length changed after June 1st, 2022. So I just ratioed the maximum questions from 150 to 175 in order to find the average with larger datasets. 
-
+                As everyone knows who has taken the CISSP exam or is studying for the exam, the exam question length changed after June 1st, 2022. <br> So I just ratioed the maximum questions from 150 to 175 in order to find the average with larger datasets. 
+                <br> <br>
                 First I created a web scraper that takes in different subreddit by using the url_template: “https://www.reddit.com/r/{subreddit}/top.json?t=all{params}’
-
+                <br> <br>
                 After printing out the data and understanding the way the website’s data is organized, I queried them as my local variables and inserted them to a newly created database 
 
             </p>
@@ -77,7 +79,7 @@
     <section id="paragraph">
         <div class="explanation">
             <p>
-                Using the sqlitebrowser, I filtered out the tables over and over until I got the dataset that I wanted to use. For example, initially, I created a table that only referenced “%passed%” or “%successful%” in the “title” and “comments” columns. The comments column is just a dataset queried from ‘selftext’. It’s when the user talks about how they passed the exam in more detail and sometimes the title didn’t always contain the number of questions they passed so I looked through that part of text as well. 
+                Using the sqlitebrowser, I filtered out the tables over and over until I got the dataset that I wanted to use. <br> For example, initially, I created a table that only referenced “%passed%” or “%successful%” in the “title” and “comments” columns.  <br> <br>The comments column is just a dataset queried from ‘selftext’. It’s when the user talks about how they passed the exam in more detail and sometimes the title didn’t always contain the number of questions they passed so I looked through that part of text as well. 
 
 
             </p>
