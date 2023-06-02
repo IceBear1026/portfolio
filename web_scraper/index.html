@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webscraper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <br><br><br><br><br>
+    <section id="headers">
+        <h1 class="title">CISSP subreddit tells us that... </h1>
+    </section><br>
+    <section id="headers">
+        <h3 class="scenario">Average number of questions of passing CISSP is at 134.671875th question. </h3>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+            Well I passed mine at 134th question.
+            </p>
+        </div>
+    </section>
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/4.PNG" alt="reddit_post" class="rounded-image">
+        </div>
+    </section>
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+            I'm not joking.
+            </p>
+        </div>
+    </section>
+
+    <section id="link">
+        <div class="link_container">
+            <h2 class="link to web scraper"><a href="https://github.com/IceBear1026/web_scrape">Github Link to the codes and sql database</a></h2>
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Okay we all know ISC2 likes to hide a lot of information behind how we did on the exam as much as they can. And so I decided to create a web scraper that collects as much data as possible that is publicly available on subreddit “CISSP” and find the average of the score that people finish their exam INCLUDING the scores recorded before June 1st 2022. 
+
+            </p>
+        </div>
+    </section>
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/1.PNG" alt="isc2_post" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                As everyone knows who has taken the CISSP exam or is studying for the exam, the exam question length changed after June 1st, 2022. So I just ratioed the maximum questions from 150 to 175 in order to find the average with larger datasets. 
+
+                First I created a web scraper that takes in different subreddit by using the url_template: “https://www.reddit.com/r/{subreddit}/top.json?t=all{params}’
+
+                After printing out the data and understanding the way the website’s data is organized, I queried them as my local variables and inserted them to a newly created database 
+
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/scraper.PNG" alt="scraper" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                Using the sqlitebrowser, I filtered out the tables over and over until I got the dataset that I wanted to use. For example, initially, I created a table that only referenced “%passed%” or “%successful%” in the “title” and “comments” columns. The comments column is just a dataset queried from ‘selftext’. It’s when the user talks about how they passed the exam in more detail and sometimes the title didn’t always contain the number of questions they passed so I looked through that part of text as well. 
+
+
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/22.PNG" alt="passed_table" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                After filtering out and ratio-ing the nth number of questions it took for the reddit posts claim they have passed at, I ended up with the final table: “converted_table”. 
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/2.PNG" alt="converted" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <p>
+                And using the avg() we got our special number!
+            </p>
+        </div>
+    </section>
+
+    <section id="image">
+        <div class="section__image__container">
+            <img src="./images/3.PNG" alt="average" class="rounded-image">
+        </div>
+    </section>
+
+    <section id="paragraph">
+        <div class="explanation">
+            <h1>
+                Now I wonder which question you passed your CISSP exam?
+            </h1>
+        </div>
+    </section><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+img[alt~="reddit_post"]{
+    max-width:30%;
+}
+
+img[alt~="isc2_post"]{
+    max-width:30%;
+}
+
+img[alt~="scraper"]{
+    max-width:30%;
+}
+
+img[alt~="passed_table"]{
+    max-width:30%;
+}
+
+img[alt~="converted"]{
+    max-width:50%;
+}
+
+img[alt~="average"]{
+    max-width:30%;
+}
+
+img{
+    width:100%;
+    object-fit:contain;
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+#headers {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 5rem;
+}
+
+#paragraph{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.explanation {
+    padding: 20px;
+    
+    max-width: 50%;
+}
+
+.rounded-image{
+    border-radius: 1rem;
+}
+
+#images{
+    display:flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-container{
+    display:flex;
+    align-items: center;
+}
+
+.section__image__container{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    text-align:center;
+    margin:0 10px;
+}
+
+#link{
+    position: relative;
+}
+
+.link_container{
+    display:flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
